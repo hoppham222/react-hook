@@ -1,22 +1,19 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
-function App() {
+const App = () => {
+  let name = 'Pham Hợp';
+  let obj = { name: 'Phạm Hợp', channel: 'Phạm Văn Hợp' };
+  let link = 'https://www.facebook.com/';
   return (
     <div className="App">
+      {/* {console.log(obj)} */}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Họ và tên : {name} - {obj.name}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <a href={link} target = "_blank">Facebook</a>
       </header>
     </div>
   );
