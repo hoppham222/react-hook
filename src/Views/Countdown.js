@@ -5,6 +5,11 @@ class CountDowwn extends React.Component{
   state = {
     count : 10
   }
+  componentWillUnmount() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  }
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState({

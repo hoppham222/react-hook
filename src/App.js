@@ -1,10 +1,15 @@
 import logo from './logo.svg';
 import './App.scss';
 import Nav from './Views/Nav.js';
-import { useState, useEffect } from 'react';
 import Todo from './Views/Todo';
 import Covid from './Views/Covid';
-import { CountDowwn,  NewCountDown } from './Views/Countdown';
+import Blog from './Views/Blog';
+import DetailBlog from './Views/DetailBlog';
+import AddNewBlog from './Views/AddNewBlock';
+
+import { useState, useEffect } from 'react';
+import { CountDowwn, NewCountDown } from './Views/Countdown';
+import {BrowserRouter,Switch,Route,Link} from "react-router-dom"
 
 const App = () => {
 
@@ -47,35 +52,49 @@ const App = () => {
   }
   
   return (
-    <div className="App">
-     
-      {/* {console.log(obj)} */}
-      <header className="App-header">
-        <Nav/>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Họ và tên : {name}
-        </p>
-        <Covid />
-        <CountDowwn onTimesup={onTimesup} />
-        <NewCountDown onTimesup={onTimesup}/>
-        
+    <BrowserRouter>
+      <div className="App">
+      
+        {/* {console.log(obj)} */}
+        <header className="App-header">
+          <Nav/>
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Họ và tên : {name}
+          </p>
+          {/* <Covid /> */}
+          {/* <CountDowwn onTimesup={onTimesup} />
+          <NewCountDown onTimesup={onTimesup} /> */}
+          <Switch>
+            <Route path='/Covid'> <Covid/> </Route>
+            <Route path='/Countdown' ><CountDowwn onTimesup={onTimesup} /></Route>
+            <Route path='/NewCountDown'><NewCountDown onTimesup={onTimesup} /></Route>
+            <Route path='/Blog' exact><Blog /></Route>
+            <Route path='/Blog/:id'>
+              <DetailBlog />
+            </Route>
+            <Route path='/Add-new-blog'>
+              <AddNewBlog />
+            </Route>
+          </Switch>
+          
 
 
-        {/* <Todo todos={todos}
-          title={'Test test'}
-          deleteDataTodo ={deleteDataTodo}
-        />
+          {/* <Todo todos={todos}
+            title={'Test test'}
+            deleteDataTodo ={deleteDataTodo}
+          />
 
-        <Todo todos={todos.filter(item => item.type==='Pham')}
-          title={' Type Phạm'}
-          deleteDataTodo = {deleteDataTodo}
-        /> */}
-        
-        {/* <input type="text" value={address} onChange= {(event) => hendleOnchenge(event)} />
-        <button type="button" onClick={(event) =>  hendleOnclick(event) } >Click me</button> */}
-      </header>
-    </div>
+          <Todo todos={todos.filter(item => item.type==='Pham')}
+            title={' Type Phạm'}
+            deleteDataTodo = {deleteDataTodo}
+          /> */}
+          
+          {/* <input type="text" value={address} onChange= {(event) => hendleOnchenge(event)} />
+          <button type="button" onClick={(event) =>  hendleOnclick(event) } >Click me</button> */}
+        </header>
+      </div>
+    </BrowserRouter>
   );
 }
 

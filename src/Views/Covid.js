@@ -5,11 +5,13 @@ import useFetch from "../Custom/Hookfetchdata";
 
 const Covid = () => {
 
-  const today = new Date(new Date().setHours(0, 0, 0, 0));
-  const priorDate = moment().subtract(30, 'days');
+  // const today = new Date(new Date().setHours(0, 0, 0, 0));
+  // const priorDate = moment().subtract(30, 'days');
+  const today = moment().startOf('day').toISOString(true);
+  const priorDate =  moment().startOf('day').subtract(30, 'days').toISOString(true);
 
   // const{ data:dataCovid , loading, errMessage} = useFetch('https://api.covid19api.com/country/vietnam?from=2022-01-01T00:00:00Z&to=2022-03-01T00:00:00Z')
-  const { data: dataCovid, loading, errMessage } = useFetch(`https://api.covid19api.com/country/vietnam?from=${priorDate.toISOString()}&to=${today.toISOString()}`)
+  const { data: dataCovid, loading, errMessage } = useFetch(`https://api.covid19api.com/country/vietnam?from=${priorDate}&to=${today}`,true)
   
   return (
     <table>
