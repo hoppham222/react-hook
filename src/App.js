@@ -4,6 +4,7 @@ import Nav from './Views/Nav.js';
 import { useState, useEffect } from 'react';
 import Todo from './Views/Todo';
 import Covid from './Views/Covid';
+import { CountDowwn,  NewCountDown } from './Views/Countdown';
 
 const App = () => {
 
@@ -35,6 +36,10 @@ const App = () => {
     setAddress(event.target.value)
   }
 
+  const onTimesup = () => {
+    alert('hết thời gian ')
+  }
+
   const deleteDataTodo = (id) => {
     let currentTodos = todos;
     currentTodos = todos.filter(item => item.id !== id)
@@ -51,7 +56,10 @@ const App = () => {
         <p>
           Họ và tên : {name}
         </p>
-        <Covid/>
+        <Covid />
+        <CountDowwn onTimesup={onTimesup} />
+        <NewCountDown onTimesup={onTimesup}/>
+        
 
 
         {/* <Todo todos={todos}
