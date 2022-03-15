@@ -1,25 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from 'moment';
+import useFetch from "../Custom/Hookfetchdata";
 
 const Covid = () => {
-  const [dataCovid, setDataCovid] = useState([]);
-  const [loading, setloatding] = useState(true);
-  useEffect(async () => {
-    setTimeout(async () => {
-    let res = await axios.get('https://api.covid19api.com/country/vietnam?from=2022-01-01T00:00:00Z&to=2022-03-01T00:00:00Z')
-    let data = res && res.data ? res.data : [];
-    if (data && data.length > 0) {
-      data.map(item => {
-        item.Date = moment(item.Date).format('DD/MM/YYYY')
-        return item;
-      })
-      data = data.reverse()
-    }
-      setDataCovid(data);
-      setloatding(false);
-    },1000)
-  }, [])
+
+  const{ data:dataCovid , loading, errMessage} = useFetch('https://api.covid19api.com/country/vietnam?from=2022-01-01T00:00:00Z&to=2022-03-01T00:00:00Z')
+  
   return (
     <table>
       {/* { console.log(dataCovid)} */}
@@ -33,7 +20,7 @@ const Covid = () => {
         </tr>
       </thead>
       <tbody>
-        { loading === false && dataCovid && dataCovid.length > 0 && 
+        { errMessage ===false && loading === false && dataCovid && dataCovid.length > 0 && 
           dataCovid.map(item => {
             return (
               <tr key={item.ID}>
@@ -51,6 +38,12 @@ const Covid = () => {
           
           <tr>
             <th>loading...</th>
+          </tr>
+        }
+
+        {errMessage === true &&       
+          <tr>
+            <th>Something wrong...</th>
           </tr>
         }
         
