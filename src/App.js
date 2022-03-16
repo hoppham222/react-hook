@@ -6,6 +6,7 @@ import Covid from './Views/Covid';
 import Blog from './Views/Blog';
 import DetailBlog from './Views/DetailBlog';
 import AddNewBlog from './Views/AddNewBlock';
+import NotFound404 from './Views/NotFound404';
 
 import { useState, useEffect } from 'react';
 import { CountDowwn, NewCountDown } from './Views/Countdown';
@@ -75,6 +76,9 @@ const App = () => {
             </Route>
             <Route path='/Add-new-blog'>
               <AddNewBlog />
+            </Route>
+            <Route path="*">
+              <NotFound404 />
             </Route>
           </Switch>
           

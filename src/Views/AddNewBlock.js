@@ -1,13 +1,14 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-const AddNewBlog = () => {
+import axios from "axios";
+const AddNewBlog =   (props) => {
   let history = useHistory();
   const handlebackdata = () => {
     history.push('/blog');
   }
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!title) {
       alert('lỗi title');
@@ -17,11 +18,21 @@ const AddNewBlog = () => {
       alert('lỗi content');
       return;
     }
-
+    let data = {
+      title: title,
+      body: content,
+      userId:1,
+    }
+    let res = await axios.post('https://jsonplaceholder.typicode.com/posts', data);
+    console.log(res)
+    if (res && res.data) {
+      let newBlog = res.data;
+      props.hendleAddNew(newBlog);
+    }
   }
   return (
     <>
-      <div> <span onClick={handlebackdata}>&#60;-- Back</span></div>
+      {/* <div> <span onClick={handlebackdata}>&#60;-- Back</span></div> */}
       
       <div>
         Thêm mới block
